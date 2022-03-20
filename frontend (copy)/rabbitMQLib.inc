@@ -1,5 +1,7 @@
 <?php
-
+require_once __DIR__ . '/vendor/autoload.php';
+use PhpAmqpLib\Connection\AMQPStreamConnection;
+use PhpAmqpLib\Message\AMQPMessage;
 require_once('get_host_info.inc');
 
 
@@ -237,7 +239,7 @@ class rabbitMQClient
 		catch(Exception $e)
 		{
 			$error = date("Y-m-d") . "  " . date("h:i:sa") . " --- Frontend --- " . "failed to send message to exchange: " . $e->getMessage() . "\n";
-			log_event($error);
+			//log_event($error);
 			die("failed to send message to exchange: ". $e->getMessage()."\n");
 		}
 	}

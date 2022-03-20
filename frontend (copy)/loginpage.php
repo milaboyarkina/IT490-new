@@ -1,3 +1,10 @@
+<?php
+ini_set('display_errors',1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,46 +17,6 @@
     <link href="../css/main.css" type="text/css" rel="stylesheet"/>
     <link rel="shortcut icon" href="../img/seedling-solid.svg"/>
     <!--Send user input to login.php to validate the user login and sessionID-->
-    <script><!--
-        function HandleLoginResponse(response)
-        {
-            var res = response;
-            var text = JSON.parse(res);
-            console.log(text.username);
-            
-            if (text.output == "1")
-            {
-                sessionStorage.setItem('username',text.username);
-                sessionStorage.setItem('sessID',text.sessID);
-                alert(text.message);
-                location.href = 'home.html';
-            }
-            else
-            {
-                alert(text.message);
-                location.href = 'login.html';
-            }
-        }
-        
-        function SendLoginRequest(username,password)
-        {
-            var request = new XMLHttpRequest();
-            var username = document.getElementById("username").value;
-            var password = document.getElementById("password").value;
-
-            request.open("POST","../testRabbitMQClient.php",true);
-            request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-            request.onreadystatechange = function ()
-            {
-                
-                if ((this.readyState == 4)&&(this.status == 200))
-                {
-                    HandleLoginResponse(this.responseText);
-                }		
-            }
-            request.send("type=login&username="+username+"&password="+password);
-        }
-    </script>-->
 </head> 
  
 <body>
@@ -57,7 +24,7 @@
     <nav class="navbar navbar-expand-md navbar-light sticky-top shadow p-3 mb-5 bg-white rounde">
         <div class="container-fluid">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
-                <span class="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-icon"><?php if(isset($_SESSION["username"])) {echo $_SESSION["username"];} ?></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav mx-auto">
@@ -85,7 +52,7 @@
             <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password">
         </div>
         
-        <button type="button" class="btn btn-primary" onclick="testRabbitMQClient.php">Sign In</button>
+        <button type="submit" class="btn btn-primary">Sign In</button>
         <a class="nav-link" href="">Forgot Password?</a>
     </form>
     </div>
