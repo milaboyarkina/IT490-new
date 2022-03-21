@@ -24,6 +24,11 @@ $response = $client->send_request($request);
 if($response == 0){
 	$error = date("Y-m-d") . "  " . date("h:i:sa") . "  --- Frontend --- " . "Error: failed to login using Username = " . $_POST["uname"] . " and Password = " . $_POST["psw"] . "\n";
 	//log_event($error);
+	//tell user creds are bad
+	$msg = "Unauthorized.\nTry Again";
+	echo "<script type='text/javascript'>alert('$msg');</script>";
+	
+	
 } else {
 	$event = date("Y-m-d") . "  " . date("h:i:sa") . "Login successful using Username = " . $_POST["username"] . " and Password = " . $_POST["password"] . "\n";
 	//log_event($event);
