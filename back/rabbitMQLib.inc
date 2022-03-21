@@ -241,8 +241,8 @@ class rabbitMQClient
 		}
 		catch(Exception $e)
 		{
-			$event = date("Y-m-d") . "  " . date("h:i:sa") . " --- DataBase --- " . "failed to send message to exchange: ". $e->getMessage() . "\n";
-    			log_event($event);
+			//$event = date("Y-m-d") . "  " . date("h:i:sa") . " --- DataBase --- " . "failed to send message to exchange: ". $e->getMessage() . "\n";
+    			//log_event($event);
 			die("failed to send message to exchange: ". $e->getMessage()."\n");
 		}
 	}
@@ -278,8 +278,8 @@ class rabbitMQClient
 		}
 		catch(Exception $e)
 		{
-			$event = date("Y-m-d") . "  " . date("h:i:sa") . " --- DataBase --- " . "failed to send message to exchange: ". $e->getMessage() . "\n";
-    			log_event($event);
+			//$event = date("Y-m-d") . "  " . date("h:i:sa") . " --- DataBase --- " . "failed to send message to exchange: ". $e->getMessage() . "\n";
+    			//log_event($event);
 			die("failed to send message to exchange: ". $e->getMessage()."\n");
 		}
 	}

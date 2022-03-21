@@ -12,12 +12,12 @@ require_once('path.inc');
 require_once('get_host_info.inc');
 require_once('rabbitMQLib.inc');
 
-function doRegister($username, $password, $fname, $lname, $email, $seca1, $seca2)
+function doRegister($fname, $username, $email, $password)
 {
-    $hostname = '192.168.194.232';
+    $hostname = '192.168.194.201';
     $dbuser = 'root';
-    $dbpass = 'admin';
-    $dbname = 'project';
+    $dbpass = 'Database@123';
+    $dbname = 'Project';
     $dbport = "3306";
     $conn = mysqli_connect($hostname, $dbuser, $dbpass, $dbname, $dbport);
 	
@@ -29,16 +29,28 @@ function doRegister($username, $password, $fname, $lname, $email, $seca1, $seca2
 	echo "Connection Established".PHP_EOL;
 	return $conn;
 	
-    $sql = "INSERT INTO `PROJECT`.`Users` (`userid`, `username`, `password`, `first_name`, `last_name`, `email`, `sec_ans1`, `sec_ans2`) VALUES (NULL, '$username', '$password', '$fname', '$lname', '$email', '$secq1', '$secq2', '$seca1', '$seca2')";
+//    $query = "INSERT INTO `Project`.`user` (`name`, `username`, `email`, `password`) VALUES ('$fname', '$username', '$email', '$password')";
+    
+    $query = "INSERT INTO `Project`.`user` (`name`, `username`, `email`, `password`) VALUES ('bob', 'bob', 'bob@gmail.com', 'bobby')";
+    
+    if (mysqli_query($conn, $query)) {
+  	echo "New record created successfully";
+}   else {
+  	echo "Error: " . $query . "<br>" . mysqli_error($conn);
+}
+
+mysqli_close($conn);
+    
+    //$sql = "INSERT INTO `PROJECT`.`Users` (`userid`, `name`, `username`, `email`, `password`, `Security Answer 1`, `Security Answer 2`) VALUES (123, '$username', '$fname + " "$lname', '$email', '$password', '$seca1', '$seca2')";
 
 }
 
 function doLogin($username,$password)
 {
-    $hostname = '192.168.194.232';
+    $hostname = '192.168.194.201';
     $dbuser = 'root';
-    $dbpass = 'admin';
-    $dbname = 'project';
+    $dbpass = 'Database@123';
+    $dbname = 'Project';
     $dbport = "3306";
     $conn = mysqli_connect($hostname, $dbuser, $dbpass, $dbname, $dbport);
 	
@@ -47,7 +59,7 @@ function doLogin($username,$password)
 		echo "Error connecting to database: ".$conn->connect_errno.PHP_EOL;
 		exit(1);
 	}
-	echo "Connection Established".PHP_EOL;
+	echo "Connection Established";
 	return $conn;
 	
 	//$username = $POST['username'];
@@ -82,13 +94,11 @@ function requestProcessor($request)
   switch ($request['type'])
   {
     case "login":
-    {
       return doLogin($request['username'],$request['password']);
-    }
     case "validate_session":
       return doValidate($request['sessionId']);
     case "register":
-      return doRegister($request['username'], $request['password'], $request['fname'], $request['lname'], $request['email'], $request['answer1'], $request['answer2']);
+      return doRegister($request['fname'], $request['username'], $request['email'], $request['password']);
   }
   return array("returnCode" => '0', 'message'=>"Server received request and processed");
 }
