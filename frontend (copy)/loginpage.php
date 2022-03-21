@@ -24,7 +24,7 @@ session_start();
     <nav class="navbar navbar-expand-md navbar-light sticky-top shadow p-3 mb-5 bg-white rounde">
         <div class="container-fluid">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
-                <span class="navbar-toggler-icon"><?php if(isset($_SESSION["username"])) {echo $_SESSION["username"];} ?></span>
+                <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav mx-auto">
@@ -44,7 +44,7 @@ session_start();
     <div class="container col-md-6">
     <h1>Sign In</h1>
     <hr>
-    <form action="login.php" method="POST" >
+    <form action="login.php" onsubmit="return checkForm()" method="POST" >
         <div class="mb-3">
             <input type="username" class="form-control" id="username" name="username" placeholder="Enter Username">
         </div>
@@ -59,6 +59,30 @@ session_start();
     <div class="container p-1"></div>
 
 </body>
+
+<script>
+	function checkForm()
+	{
+		var name = document.getElementById("username").value;
+		var password = document.getElementById("password").value;
+		
+		if (username.length == 0)
+		{
+			alert("Username cannot be blank");
+			return false;
+		}
+		else
+		{
+			if (password.length > 0)
+			{return true;}
+			else
+			{
+				alert("Please enter a password");
+				return false;			
+			}
+		}
+	}
+</script>
 
 <!--Footer-->
 <footer class="text-center text-white sticky-bottom container-fluid footer" style="background-color: #7d9988;">
