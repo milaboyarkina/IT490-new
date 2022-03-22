@@ -32,12 +32,12 @@ if($response == 1){
 } else{
 	//$event = date("Y-m-d") . "  " . date("h:i:sa") . "Login successful using Username = " . $_POST["username"] . " and Password = " . $_POST["password"] . "\n";
 	//log_event($event);
+	
+	//user not found
         header("Location: loginpage.php");
 	$msg = "Unauthorized.\nTry Again";
         echo "<script type='text/javascript'>alert('$msg');</script>";
-	//$_SESSION["username"] = $_POST["username"];
-	//$_SESSION["user_id"] = $response["user_id"];
-	//header("Location: loginpage.php");
+
 }
 
 exit();		
