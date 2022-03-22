@@ -24,13 +24,9 @@ $response = $client->send_request($request);
 if($response == 1){
 	//$error = date("Y-m-d") . "  " . date("h:i:sa") . "  --- Frontend --- " . "Error: failed to login using Username = " . $_POST["uname"] . " and Password = " . $_POST["psw"] . "\n";
 	//log_event($error);
-	//tell user creds are bad
-	//$msg = "Unauthorized.\nTry Again";
+	//response received, user authorized
 	$_SESSION["username"] = $_POST["username"];
-        //$_SESSION["user_id"] = $response["user_id"];
         header("Location: home.php");
-
-	//echo "<script type='text/javascript'>alert('$msg');</script>";
 	
 	
 } else{
@@ -43,7 +39,7 @@ if($response == 1){
 	//$_SESSION["user_id"] = $response["user_id"];
 	//header("Location: loginpage.php");
 }
-//header("Location: home.php");
+
 exit();		
 }
 ?>
