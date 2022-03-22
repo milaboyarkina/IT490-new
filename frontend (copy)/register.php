@@ -16,15 +16,15 @@ $client = new rabbitMQClient("testRabbitMQ.ini","testServer");
 
 $request = array();
 $request['type'] = "register";
-$request['username'] = _$POST["username"];
-$request['password'] = _$POST["password"];
-$request['email'] = _$POST["email"];
-$request['fname'] = _$POST["fname"];
-$request['lname'] = _$POST["lname"];
+$request['username'] = $_POST["username"];
+$request['password'] = $_POST["password"];
+$request['email'] = $_POST["email"];
+$request['fname'] = $_POST["fname"];
+$request['lname'] = $_POST["lname"];
 //$request['securityq1'] = $_POST['securityq1'];
 //$request['securityq2'] = $_POST['securityq2'];
-$request['answer1'] = _$POST["answer1"];
-$request['answer2'] = _$POST["answer2"];
+$request['answer1'] = $_POST["answer1"];
+$request['answer2'] = $_POST["answer2"];
 $response = $client->send_request($request);
 
 if($response == 1){
@@ -39,10 +39,10 @@ if($response == 1){
 	//$error = date("Y-m-d") . "  " . date("h:i:sa") . " --- Frontend --- " . "Error: failed to register using Username = " . $_POST["uname"] . " and Password = " . $_POST["psw"] . "\n";
 	//log_event($error);
 	//session_destroy();
-	header("Location: register.php");
+	header("Location: signup.php");
 	exit();
 }
-header("signup.php");
+//header("Location: signup.php");
 exit();
 }
 ?>
