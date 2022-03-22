@@ -17,9 +17,6 @@ $request['type'] = "login";
 $request['username'] = $_POST["username"];
 $request['password'] = $_POST["password"];
 $response = $client->send_request($request);
-//$errFlag = False;
-//$nameErr = False;
-//$passErr = False;
 
 if($response == 0){
 	$error = date("Y-m-d") . "  " . date("h:i:sa") . "  --- Frontend --- " . "Error: failed to login using Username = " . $_POST["uname"] . " and Password = " . $_POST["psw"] . "\n";
@@ -34,34 +31,6 @@ if($response == 0){
 header("Location: home.php");
 exit();		
 }
-
-/*
-if(empty($name)){
-	$errFlag = True;
-	$nameErr = True;
-}
-if(empty($pass)){
-	$errFlag = True;
-	$passErr = True;
-}
-
-if($errFlag){
-	$obj->nameErr = $nameErr;
-	$obj->passErr = $passErr;
-}else{
-	$response = sendRabbit(array('type' => 'login', 'data' => array('username' => $name, 'password' => sha1($pass))));
-	$obj->response = $response;
-	if($response == 0){
-		session_start();
-		$_SESSION['user'] = $name;
-		header("Location: localhost/frontend/home.php");
-	}
-}
-
-echo json_encode($obj);
-
-header("Location: localhost/frontend/home.php");
-*/
 
 
 ?>
