@@ -27,11 +27,10 @@ function registerUser($fname, $username, $email, $password)
 		exit(1);
 	}
 	echo "Connection Established".PHP_EOL;
-	//return $conn;
+	
 	
     $query = "INSERT INTO `Project`.`user` (`name`, `username`, `email`, `password`) VALUES ('$fname', '$username', '$email', '$password')";
     
- //   $query = "INSERT INTO `Project`.`user` (`name`, `username`, `email`, `password`) VALUES ('bob', 'bob', 'bob@gmail.com', 'bobby')";
     
     if (mysqli_query($conn, $query)) {
   	echo "New record created successfully";
@@ -42,8 +41,6 @@ function registerUser($fname, $username, $email, $password)
 
 mysqli_close($conn);
     
-    //$sql = "INSERT INTO `PROJECT`.`Users` (`userid`, `name`, `username`, `email`, `password`, `Security Answer 1`, `Security Answer 2`) VALUES (123, '$username', '$fname + " "$lname', '$email', '$password', '$seca1', '$seca2')";
-
 }
 
 function loginUser($username,$password)
@@ -61,7 +58,6 @@ function loginUser($username,$password)
 		exit(1);
 	}
 	echo "Connection Established".PHP_EOL;
-	//return $conn;
 	
 	//$username = $POST['username'];
 	//$password = $POST['password'];
