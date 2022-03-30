@@ -12,7 +12,7 @@ require_once('path.inc');
 require_once('get_host_info.inc');
 require_once('rabbitMQLib.inc');
 
-function registerUser($fname, $username, $email, $password)
+function registerUser($fname, $lname, $username, $email, $password, $securityq1, $securityq2, $answer1, $answer2)
 {
     $hostname = '192.168.194.201';
     $dbuser = 'root';
@@ -28,8 +28,13 @@ function registerUser($fname, $username, $email, $password)
 	}
 	echo "Connection Established".PHP_EOL;
 	
+    $fullname = trim($fname) . ' ' . trim($lname);
+    $username = strtolower(trim($username));
+    $email = trim($email); 
+    $answer1 = strtolower(trim($answer1)); 
+    $answer2 = strtolower(trim($answer2)); 
 	
-    $query = "INSERT INTO `Project`.`user` (`name`, `username`, `email`, `password`) VALUES ('$fname', '$username', '$email', '$password')";
+    $query = "INSERT INTO `Project`.`user` (`name`, `username`, `email`, `password`, `Security Question 1`, `Security Answer 1`,  `Security Question 2`, Security Answer 2`) VALUES ('$fullname', '$username', '$email', '$password', '$securityq1', '$answer1', '$securityq2', $answer2)";
     
     
     if (mysqli_query($conn, $query)) {
@@ -63,6 +68,8 @@ function loginUser($username,$password)
 	//$password = $POST['password'];
 	//$username2 = $mysqli->escape_string($username);
 	//$password2 = $mysqli->escape_string($password);
+	
+	$username = strtolower(trim($username));
 	
 	// lookup username and password in database
 	$sql = "SELECT * FROM user WHERE username='$username' AND password='$password'";
