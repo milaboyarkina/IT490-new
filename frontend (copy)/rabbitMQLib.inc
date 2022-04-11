@@ -19,9 +19,9 @@ class rabbitMQServer
 	private $exchange_type = "topic";
 	private $auto_delete = false;
 
-	function __construct($machine, $server = "rabbitMQ", $try)
+	function __construct($machine, $server = "rabbitMQ")
 	{
-		$this->machine = getHostInfo(array($machine), $try);
+		$this->machine = getHostInfo(array($machine));
 		$this->BROKER_HOST   = $this->machine[$server]["BROKER_HOST"];
 		$this->BROKER_PORT   = $this->machine[$server]["BROKER_PORT"];
 		$this->USER     = $this->machine[$server]["USER"];
