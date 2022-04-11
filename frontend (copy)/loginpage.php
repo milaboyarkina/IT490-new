@@ -11,10 +11,11 @@ ini_set('display_errors',1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-$rabbitCluster = array("testServer", "testServer1", "testServer2");
+$testServerNumber = array("testServer", "testServer1", "testServer2");
+$testIPFiles = array("testRabbitMQ1.ini", "testRabbitMQ1.ini", "testRabbitMQ2.ini");
 
 for ($i = 0; $i < 2; $i++) {
-    $client = new rabbitMQClient("testRabbitMQ.ini", $rabbitCluster[$i], $i);
+    $client = new rabbitMQClient($testIPFiles[$i], $rabbitCluster[$i], $i);
 
     $request = array();
     $request['type'] = "login";
