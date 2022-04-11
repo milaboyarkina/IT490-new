@@ -208,9 +208,12 @@ class rabbitMQClient
 			$params['login'] = $this->USER;
 			$params['password'] = $this->PASSWORD;
 			$params['vhost'] = $this->VHOST;
-
-			$conn = new AMQPConnection($params);
-			$conn->connect();
+			try {
+				$conn = new AMQPConnection($params);
+				$conn->connect();
+			} catch (Exception $e) {
+				return 3; 
+			}
 
 			$channel = new AMQPChannel($conn);
 
