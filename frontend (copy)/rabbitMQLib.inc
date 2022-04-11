@@ -156,9 +156,9 @@ class rabbitMQClient
 	private $response_queue = array();
 	private $exchange_type = "topic";
 
-	function __construct($machine, $server = "rabbitMQ")
+	function __construct($machine, $server = "rabbitMQ", $try)
 	{
-		$this->machine = getHostInfo(array($machine));
+		$this->machine = getHostInfo(array($machine), $try);
 		$this->BROKER_HOST   = $this->machine[$server]["BROKER_HOST"];
 		$this->BROKER_PORT   = $this->machine[$server]["BROKER_PORT"];
 		$this->USER     = $this->machine[$server]["USER"];
