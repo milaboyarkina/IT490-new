@@ -10,13 +10,24 @@ include("functions.php");
 ini_set('display_errors',1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-$client = new rabbitMQClient("testRabbitMQ.ini","testServer");
 
-$request = array();
-$request['type'] = "login";
-$request['username'] = $_POST["username"];
-$request['password'] = $_POST["password"];
-$response = $client->send_request($request);
+$rabbitCluster = array("testServer", "testServer1", "testServer2");
+
+for ($i = 0; $i < 2; $i++) {
+    $client = new rabbitMQClient("testRabbitMQ.ini", $rabbitCluster[$i], $i);
+
+    $request = array();
+    $request['type'] = "login";
+    $request['username'] = $_POST["username"];
+    $request['password'] = $_POST["password"];
+    
+    $response = $client->send_request($request);
+	
+    if ($response != 3) {
+	    break;
+    }
+}
+
 //$errFlag = False;
 //$nameErr = False;
 //$passErr = False;
@@ -29,7 +40,8 @@ if($response == 1){
         header("Location: home.php");
 	
 	
-} else{
+}
+if($response == 0){
 	//$event = date("Y-m-d") . "  " . date("h:i:sa") . "Login successful using Username = " . $_POST["username"] . " and Password = " . $_POST["password"] . "\n";
 	//log_event($event);
 	
