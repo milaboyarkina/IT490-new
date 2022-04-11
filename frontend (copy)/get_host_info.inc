@@ -16,7 +16,7 @@ function getHostInfo(array $extra = NULL, $try)
         $machine = parse_ini_file("host1.ini",$process_sections=true);
     }
      if ($try == 2) {
-        $machine = parse_ini_file("host3.ini",$process_sections=true);
+        $machine = parse_ini_file("host2.ini",$process_sections=true);
     }
     
     if ($extra != NULL)
